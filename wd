@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -o pipefail -C
+
+if [ -z "$1" ]; then
+    echo "Directly go to a directory within the code directory"
+    echo
+    echo "Usage: wd <directory>"
+    echo
+    echo "Example:"
+    echo "  wd bin"
+    echo
+    exit 0
+fi
+
+dir=$(find ~/code -maxdepth 2 -type d -name "$1" | head -n 1)
+
+[[ -n "$dir" ]] && cd $dir && exit 0
+
+echo "Directory cannot be found"
