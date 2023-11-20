@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -o pipefail -C
+
+if [ -z "$1" ]; then
+    echo "Usage: invoice <...minutes>"
+    echo
+    echo "Example:"
+    echo "  invoice 30 40 60"
+    echo
+    exit 0
+fi
+
+# Calculate the sum of the remaining arguments
+sum=0
+for arg in "$@"; do
+  sum=$((sum + arg))
+done
+
+price=50
+
+# Calculate hours and minutes from the sum
+hours=$((sum / 60))
+minutes=$((sum % 60))
+
+# Print the hours and minutes in HH:MM format
+printf "%02d:%02d uur\n" $hours $minutes
+
+# Calculate the price in euros
+euro=`bc -l <<< "scale=4; $hours * $price + $price / 60 * $minutes"`
+
+# Print the total price in euros with 2 decimal places
+printf "%0.2f euro\n" $euro

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -o pipefail -C
+
+docker run --rm -ti -v `pwd`:/code -w /code composer:latest composer "$@"
