@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -o pipefail -C
+
+docker run --rm -ti -v ~/code/bin/php:/code -w /code devphp php console.php "$@"
