@@ -34,6 +34,15 @@ Example:
   php info.php                            # execute php file
 ```
 
+### symfony
+```sh
+Usage: symfony <command>
+
+Example:
+  symfony security:check                  # Check security issues in project dependencies
+  symfony check:requirements              # Check requirements
+```
+
 ### wd
 ```sh
 Usage: wd <directory>

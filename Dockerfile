@@ -9,6 +9,7 @@ RUN apt-get update \
         libzip-dev \
         zip \
         dnsutils \
+        git \
     && docker-php-ext-install -j "$(nproc --all)" \
         pdo_mysql \
         exif \
@@ -24,6 +25,9 @@ RUN apt-get update \
         appuser \
     && usermod -aG sudo appuser \
     && echo "appuser ALL=NOPASSWD:ALL" >> /etc/sudoers \
+    # install symfony
+    && curl -sS https://get.symfony.com/cli/installer | bash \
+    && mv /root/.symfony5/bin/symfony /usr/local/bin/symfony \
     # cleanup
     && rm -rf /var/www/* \
     && apt-get autoremove --assume-yes \

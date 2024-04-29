@@ -20,8 +20,14 @@ case "$1" in
         exit 0
     ;;
 
+    # run bash in dev image
+    bash) run bash && exit ;;
+
     # run composer commands from current directory
     composer) run "$@" && exit ;;
+
+    # run symfony commands from current directory
+    symfony) run "$@" && exit ;;
 
     # run php commands
     *) run php "$@" && exit ;;
