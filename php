@@ -2,9 +2,27 @@
 
 set -o pipefail -C
 
-if [ $1 = "build" ]; then
-    docker build -t binphp ~/code/bin/
-    exit 0
-fi
+image=binphp
 
-docker run --rm -ti -v `pwd`:/code -w /code binphp php "$@"
+run() { 
+    docker run --rm -ti -v $PWD:/code -w /code $image "$@"
+}
+
+case "$1" in
+
+    # build the dev image
+    build) 
+        docker build \
+            --build-arg COMPOSER_VERSION=2.6.6 \
+            --build-arg PHP_VERSION=8.3.6-cli-bookworm \
+            --tag $image \
+            $HOME/code/bin/
+        exit 0
+    ;;
+
+    # run composer commands from current directory
+    composer) run "$@" && exit ;;
+
+    # run php commands
+    *) run php "$@" && exit ;;
+esac

@@ -13,3 +13,5 @@ nbproject/
 
 # Vagrant
 .vagrant/
+
+/vendor/
