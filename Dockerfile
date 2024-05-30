@@ -10,6 +10,7 @@ RUN apt-get update \
         zip \
         dnsutils \
         git \
+        hugo \
     && docker-php-ext-install -j "$(nproc --all)" \
         pdo_mysql \
         exif \

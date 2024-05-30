@@ -29,6 +29,9 @@ case "$1" in
     # run symfony commands from current directory
     symfony) run "$@" && exit ;;
 
+    # run symfony commands from current directory
+    hugo) run "$@" && exit ;;
+
     # run php commands
     *) run php "$@" && exit ;;
 esac
